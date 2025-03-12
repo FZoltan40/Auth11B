@@ -27,24 +27,47 @@ namespace Authentication
         //INSERT INTO `users`(`UserName`, `Email`, `Password`) VALUES ('kata01','kata01@gmail.com','Alma')
         private void LoginUser(string username, string password)
         {
-            using (var connection = new MySqlConnection(ConnectionString))
+            try
             {
-                string sql = "SELECT `Id`,`Role` FROM `users` WHERE `UserName`= @username AND `Password`= @password;";
-
-                connection.Open();
-                using (var command = new MySqlCommand(sql, connection))
+                using (var connection = new MySqlConnection(ConnectionString))
                 {
-                    command.Parameters.AddWithValue("@username", username);
-                    command.Parameters.AddWithValue("@password", password);
+                    string sql = "SELECT `Id`,`Role` FROM `users` WHERE `UserName`= @username AND `Password`= @password;";
 
-                    MySqlDataReader dr = command.ExecuteReader();
+                    connection.Open();
+                    using (var command = new MySqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@password", password);
 
-                    var result = dr.Read();
+                        MySqlDataReader dr = command.ExecuteReader();
 
-                    MessageBox.Show(result.ToString());
+                        var result = dr.Read();
+
+                        UserData.Id = dr.GetInt32(0);
+                        UserData.Role = dr.GetInt32(1);
+
+                    }
+                    connection.Close();
+
+                    if (UserData.Role == 0)
+                    {
+                        User user = new User();
+                        user.ShowDialog();
+                    }
+                    else
+                    {
+                        Admin admin = new Admin();
+                        admin.ShowDialog();
+                    }
                 }
-                connection.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
         }
     }
 }
+

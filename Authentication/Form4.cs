@@ -19,6 +19,8 @@ namespace Authentication
             {
                 Register register = new Register();
                 register.ShowDialog();
+                listBox1.Items.Clear();
+                ReadUserData();
             }
             catch (Exception ex)
             {

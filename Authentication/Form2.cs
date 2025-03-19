@@ -17,6 +17,7 @@ namespace Authentication
             if (textBox2.Text == textBox3.Text)
             {
                 MessageBox.Show(AddNewUser(textBox1.Text, textBox4.Text, textBox2.Text));
+                this.Close();
             }
             else
             {

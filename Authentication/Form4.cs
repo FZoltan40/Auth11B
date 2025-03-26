@@ -48,8 +48,8 @@ namespace Authentication
                             {
                                 Id = dr.GetInt32(0),
                                 UserName = dr.GetString(1),
-                                Password = dr.GetString(3),
                                 Email = dr.GetString(2),
+                                Password = dr.GetString(3),
                                 Role = dr.GetInt32(4)
                             };
 

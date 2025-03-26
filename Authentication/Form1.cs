@@ -9,9 +9,10 @@ namespace Authentication
         public Login()
         {
             InitializeComponent();
+            textBox1.Text = "kata01";
+            textBox2.Text = "Alma";
         }
         private const string ConnectionString = "Server=localhost;Database=auth11b;Uid=root; Password=;SslMode=None";
-
 
         private void label3_Click(object sender, EventArgs e)
         {
